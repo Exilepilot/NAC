@@ -28,21 +28,29 @@ SCREEN = pygame.display.set_mode(SCREEN_SIZE)
 def run():
     depth = MEDIUM_DEPTH
     option = None
-
     menu = MainMenu(SCREEN)
-    settings = AISettingsMenu(SCREEN)
+    AI_settings = AISettingsMenu(SCREEN)
+    game_settings = GameSettingsMenu(SCREEN)
     game = Game(SCREEN)
+    computer_first = False
     # Main game loop
     while True:
         # Get the button clicked from the main menu.
         option = menu.main()
-        if option in (1, 2):
-            print("HELLO WORLD")
-            game.setup_game(option,2)
-            game.play(depth)
+        if option == 1:
+            input = game_settings.main()
+            if input == False:
+                option = None
+            else:
+                computer_first = (input == 2)
+                game.play(option, depth, computer_first)
+        elif option == 2:
+            game.play(option, depth)
         elif option == 3:
-            depth = settings.main(depth)
+            depth = AI_settings.main(depth)
         elif option == 4:
             break
+
+
 
 run()

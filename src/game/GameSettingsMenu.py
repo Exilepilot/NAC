@@ -1,7 +1,7 @@
 """
 A menu that lets the user choose who plays first.
 """
-
+#TODO: Finish this and make sure it works.
 import pygame
 
 try:
@@ -17,8 +17,6 @@ from game.Locals import *
 from game.Button import Button
 from game.Title import Title
 
-
-
 class GameSettingsMenu:
     left_button_fg = (light_red, red)
     left_button_bg = (black, white)
@@ -31,43 +29,35 @@ class GameSettingsMenu:
         self.__screen = screen
         self.__font = pygame.font.Font(pygame.font.match_font("Topaz-8"), 25)
 
-        # Create the surface containing the buttons and graphics.
-        self.__surface = pygame.Surface((400, 400))
-        self.__rect = self.__surface.get_rect()
-
-        # Position the surface
-        self.__rect.x = 100
-        self.__rect.y = 100
-
+        self.__title_font = pygame.font.Font(pygame.font.match_font("Topaz-8"), 30)
+        self.__title = Title(self.__screen, self.__title_font,
+                             "Who goes first?", 300, 50, True, True)
         # Create buttons
-        self.__left_bttn = Button(self.__surface, self.__font, 190, 50, 0, 350,
-                                  "Player 1", False, self.left_button_bg,
+        self.__left_bttn = Button(self.__screen, self.__font, 190, 50, 200, 300,
+                                  "YOU", True, self.left_button_bg,
                                   self.left_button_fg)
 
-        self.__right_bttn = Button(self.__surface, self.__font, 190, 50, 210, 350,
-                                  "Player 1", False, self.right_button_bg,
+        self.__right_bttn = Button(self.__screen, self.__font, 190, 50, 400, 300,
+                                  "COMPUTER", True, self.right_button_bg,
                                   self.right_button_fg)
 
     def draw(self):
         self.__screen.fill(blue)
-        self.__surface.fill(light_blue)
+        self.__title.draw()
         self.__left_bttn.draw()
         self.__right_bttn.draw()
-        self.__screen.blit(self.__surface, self.__rect)
         pygame.display.update()
 
     def update(self, event):
         # Reset state of the menu
         self.__clicked = False
-        x, y = self.__rect.x, self.__rect.y
-        event.pos = (event.pos[0] - x, event.pos[1] - y)
 
         self.__left_bttn.update(event)
         self.__right_bttn.update(event)
 
-        if self.__left.clicked:
+        if self.__left_bttn.clicked:
             self.__clicked = 1
-        elif self.__right.clicked:
+        elif self.__right_bttn.clicked:
             self.__clicked = 2
 
     def __clear(self):
