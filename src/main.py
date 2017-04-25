@@ -38,11 +38,15 @@ def run():
         # Get the button clicked from the main menu.
         option = menu.main()
         if option == 1:
-            input = game_settings.main()
+            # Get the button pressed in the game settings form by the user.
+            # Returning 1 for 'you' as in the user, 2 for 'computer' and
+            # False which means that the user has pressed the escape key.
+            player = game_settings.main()
             if input == False:
                 option = None
             else:
-                computer_first = (input == 2)
+                computer_first = (player == 2)
+                print(computer_first)
                 game.play(option, depth, computer_first)
         elif option == 2:
             game.play(option, depth)
