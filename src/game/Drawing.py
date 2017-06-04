@@ -87,7 +87,6 @@ def draw_win(master, winfo, line_colour):
     Params: line_colour, tuple (r, g, b), colour of the line to draw.
     Returns: None.
     """
-    print(winfo)
     # Get the width and height of the surface.
     rect = master.get_rect()
     width = rect.width
@@ -128,22 +127,3 @@ def draw_win(master, winfo, line_colour):
         y2 = height if pos == 0 else 0
 
         pygame.draw.line(master, line_colour, (x1, y1), (x2, y2), line_width)
-
-def draw_msg(master, font, text, colour, x, y, bgcolour=None):
-    """
-    Draws text on surface.
-    Params: master, pygame.Surface, surface to place text on.
-    Params: font, pygame.font.Font, font to render with.
-    Params: text, string, string to draw.
-    Params: x, int, x position (centered)
-    Params: y, int, y position (centered)
-    Returns: None
-    Creation: 8/1/17
-    """
-
-    msg = font.render(text, True, colour, bgcolour)
-    msg_rect = msg.get_rect()
-    msg_rect.centerx = x
-    msg_rect.centery = y
-
-    master.blit(msg, msg_rect)

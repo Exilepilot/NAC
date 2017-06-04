@@ -1,5 +1,4 @@
 import sys
-import tkinter
 
 # For checking if user has pygame package installed.
 # Without pygame the program doesn't work.
@@ -27,7 +26,6 @@ SCREEN = pygame.display.set_mode(SCREEN_SIZE)
 
 def run():
     depth = MEDIUM_DEPTH
-    option = None
     menu = MainMenu(SCREEN)
     AI_settings = AISettingsMenu(SCREEN)
     game_settings = GameSettingsMenu(SCREEN)
@@ -36,23 +34,19 @@ def run():
     # Main game loop
     while True:
         # Get the button clicked from the main menu.
-        option = menu.main()
-        if option == 1:
+        bttn_opt = menu.main()
+        if bttn_opt == 1:
             # Get the button pressed in the game settings form by the user.
             # Returning 1 for 'you' as in the user, 2 for 'computer' and
             # False which means that the user has pressed the escape key.
-            player = game_settings.main()
-            if input == False:
-                option = None
-            else:
-                computer_first = (player == 2)
-                print(computer_first)
-                game.play(option, depth, computer_first)
-        elif option == 2:
-            game.play(option, depth)
-        elif option == 3:
+            first_player = game_settings.main()
+            # Enter game loop.
+            game.play(bttn_opt, depth, first_player == 2)
+        elif bttn_opt == 2:
+            game.play(bttn_opt, depth)
+        elif bttn_opt == 3:
             depth = AI_settings.main(depth)
-        elif option == 4:
+        elif bttn_opt == 4:
             break
 
 

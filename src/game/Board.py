@@ -41,11 +41,13 @@ class Board:
         draw = self.draw()
         return win or draw
 
+    @property
     def active_player(self):
         """
         Get the peice which needs to move next.
+        Note: A rule of tic tac toe is that cross always starts first.
         """
-        return NOUGHT if self.turns % 2 == 0 else CROSS
+        return CROSS if self.turns % 2 == 0 else NOUGHT
 
     def check_rows(self, peice, n):
         """

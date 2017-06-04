@@ -11,8 +11,8 @@ BOARD_POS = BOARD_X, BOARD_Y = 100, 100
 # Board rows and columns.
 ROWS = COLUMNS = 3
 # Peices on the board.
-NOUGHT = 1
-CROSS = 2
+NOUGHT = 2
+CROSS = 1
 # Empty peice is represented by None.
 EMPTY = None
 # Maximum AI depth for each difficulty.
